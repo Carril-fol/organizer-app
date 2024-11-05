@@ -12,14 +12,14 @@ const UnLoggedInNavbar = () => {
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link to="auth/login">
-            <Button color="primary" variant="ghost" className="font-semibold">
+            <Button className="bg-gray-700 hover:bg-white hover:border-2 hover:border-gray-700 hover:text-gray-700 text-white font-bold py-2 px-4 transition-all duration-300 ease-in-out">
               Login
             </Button>
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link to="auth/register">
-            <Button color="secondary" variant="ghost" className="font-semibold">
+            <Button className="bg-white hover:bg-gray-700 border-2 border-gray-700 hover:text-white text-gray-700 font-bold py-2 px-4 transition-all duration-300 ease-in-out">
               Sign Up
             </Button>
           </Link>
