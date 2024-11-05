@@ -7,11 +7,10 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Button,
-  Divider
+  Button
 } from "@nextui-org/react";
 
-import { LogOut, UserRoundCog, MenuIcon, Menu } from 'lucide-react';
+import { LogOut, UserRoundCog, MenuIcon } from 'lucide-react';
 import Logo from "./Logo";
 
 const LoggedNavbar = () => {
