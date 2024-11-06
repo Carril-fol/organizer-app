@@ -1,32 +1,49 @@
-import { Button } from "@nextui-org/react";
-import InputForm from "../../common/InputForm";
-import Logo from "../../common/Logo";
+import { useState } from "react";
+import { Button, Input, Link, Checkbox } from "@nextui-org/react";
+import LogoInBlack from "../../common/LogoInBlack";
 
 const LoginForm = () => {
+  const [isSelected, setIsSelected] = useState(false);
+
   return (
-    <form method="post" className="w-1/5 rounded-xl shadow-xl translate-y-full animate-move-up transition-all duration-1000 ease-out">
-      <div className="py-3 flex-row px-5 justify-center items-center">
-        <div className="">
-          <div className="flex flex-col justify-center items-center">
-            <Logo width={80} height={80} alt="Logo" />
-            <h2 className="font-semibold text-xl">
-              Login
-            </h2>
+    <form method="POST" className="min-w-fit px-5 py-5 rounded-xl translate-y-full animate-move-up transition-all duration-100 ease-out">
+      <div className="flex max-w-full justify-center">
+        <div className="min-w-80 flex justify-center">
+          <div className="flex flex-col justify-center">
+            <LogoInBlack width={90} height={90} alt="Logo" />
           </div>
         </div>
-        <div className="py-2">
-          <InputForm label="Email" type="text" />
-        </div>
-        <div className="py-2">
-          <InputForm label="Password" type="password" />
-        </div>
-        <div className="py-4 flex justify-center">
-          <Button size="md" color="default" variant="ghost" className="font-bold">
-            Sign up
-          </Button>
+        <div className="min-w-80">
+          <div className="mx-5">
+            <h2 className="text-2xl font-bold">Iniciar Sesión</h2>
+            <p className="text-sm text-gray-600">Por favor, ingresa tus credenciales para acceder a tu cuenta.</p>
+            <div className="py-2">
+              <Input label="Email" type="text" variant="underlined" className="mb-1" required />
+            </div>
+            <div className="py-2">
+              <Input label="Password" type="password" variant="underlined" className="mb-1" required />
+              <Link className="text-sm text-blue-500 hover:underline">
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </div>
+            <div className="flex items-center my-3">
+              <Checkbox isSelected={isSelected} onValueChange={setIsSelected}>
+                Recordar mi sesión
+              </Checkbox>
+            </div>
+            <div className="py-4 flex flex-col justify-center">
+              <Button size="md" color="default" className="bg-black text-white font-semibold">
+                Iniciar Sesión
+              </Button>
+            </div>
+            <p className="text-sm text-gray-600 mt-4">
+              ¿No tienes una cuenta? <Link className="text-blue-500 hover:underline">Regístrate aquí</Link>.
+            </p>
+          </div>
         </div>
       </div>
     </form>
   );
 }
+
 export default LoginForm;
