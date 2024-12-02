@@ -6,11 +6,14 @@ from flask import (
 )
 from flask_jwt_extended import (
     create_access_token,
+    create_refresh_token,
     jwt_required,
     get_jwt_identity,
     get_jwt,
     unset_access_cookies,
-    set_access_cookies
+    set_access_cookies,
+    set_refresh_cookies,
+    unset_jwt_cookies
 )
 from services.user_service import UserService
 from services.token_service import TokenService
@@ -111,8 +114,10 @@ async def login():
     try:
         user_exists = await user_service.authenticate_user(data)
         access_token = create_access_token(user_exists)
+        refresh_token = create_refresh_token(user_exists)
         response = make_response({"msg": "Login successful"}, 200)
         set_access_cookies(response, access_token)
+        set_refresh_cookies(response, refresh_token)
         return response
     except UserNotFoundException as error:
         return {"error": (str(error))}, 404
@@ -187,10 +192,10 @@ async def logout():
     ```
     """
     try:
-        token = get_jwt()
-        await token_service.blacklist_token(token)
+        #await token_service.blacklist_token(token)
         response = make_response(jsonify({"msg": "Logout succesfully"}), 200)
         unset_access_cookies(response)
+        unset_jwt_cookies(response)
         return response
     except Exception as error:
         return {"error": (str(error))}, 400
@@ -217,4 +222,7 @@ def refresh_token():
     """
     current_user = get_jwt_identity()
     new_access_token = create_access_token(identity=current_user)
-    return {"access_token": new_access_token}, 200
+    response = make_response({"access_token": new_access_token}, 200)
+    set_access_cookies(response, new_access_token)
+    set_refresh_cookies(response, current_user)
+    return response
