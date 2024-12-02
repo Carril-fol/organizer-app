@@ -40,8 +40,8 @@ class FolderService:
         folder_instance = self.folder_repository.get_folder_by_id(folder_id)
         return folder_instance if folder_instance else False
     
-    def create_folder(self, data: dict, user_data_in_token: dict):
-        user = self._get_user_id_requested(user_data_in_token)
+    async def create_folder(self, data: dict, token: dict):
+        user = self._get_user_id_requested(token)
         folder_model = self._format_data_in_model(data, user)
         folder_created = self.folder_repository.create_folder(folder_model)
         return folder_created
@@ -58,19 +58,19 @@ class FolderService:
         }
         return data_folder
     
-    async def get_folders_from_user(self, user_data_from_token: dict):
+    def get_folders_from_user(self, user_data_from_token: dict):
         user_id = self._get_user_id_requested(user_data_from_token)
-        folders = await self.folder_repository.get_folders_by_user_id(user_id)
+        folders = self.folder_repository.get_folders_by_user_id(user_id)
         list_of_folders = self._list_of_folders_in_format_json(folders)
         return list_of_folders
     
-    async def update_folder(self, user_data_from_token: dict, folder_id: str, data: dict):
-        user = self._get_user_id_requested(user_data_from_token)
+    async def update_folder(self, token: dict, folder_id: str, data: dict):
+        user = self._get_user_id_requested(token)
         folder = self.check_if_folder_exists_by_id(folder_id)
         if not folder:
             raise FolderNotFound()
-        folder_with_new_data = self._format_data_in_model(data, user)
-        folder_updated = await self.folder_repository.update_folder(folder_id, folder_with_new_data)
+        data["user_id"] = ObjectId(user)
+        folder_updated = await self.folder_repository.update_folder(folder_id, data)
         return folder_updated
     
     async def delete_folder(self, folder_id: str):

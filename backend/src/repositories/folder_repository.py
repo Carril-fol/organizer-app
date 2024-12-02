@@ -18,19 +18,19 @@ class FolderRepository(object):
         folder_founded = self.folder_collection.find_one(folder_data_dict)
         return folder_founded
     
-    async def get_folders_by_user_id(self, user_id: str):
+    def get_folders_by_user_id(self, user_id: str):
         user_data_dict = {"user_id": ObjectId(user_id)}
         folders_from_the_user = self.folder_collection.find(user_data_dict)
         return folders_from_the_user
     
-    async def update_folder(self, folder: dict, folder_with_new_data: FolderModel):
-        folder_dict_id = {"_id": ObjectId(folder.get("id"))}
-        folder_dict = folder_with_new_data.model_dump(by_alias=True)
-        folder_update_instance = self.folder_collection.update_one(folder_dict_id, folder_dict)
+    async def update_folder(self, folder_id: str, data: dict):
+        folder_object_id = {"_id": ObjectId(folder_id)}
+        folder_dict = {"$set": data}
+        folder_update_instance = self.folder_collection.update_one(folder_object_id, folder_dict)
         return folder_update_instance
     
-    async def delete_folder(self, folder: dict):
-        folder_id = folder.get("id")
+    async def delete_folder(self, folder_id: str):
         folder_dict_id = {"_id": ObjectId(folder_id)}
         folder_delete_instance = self.folder_collection.delete_one(folder_dict_id)
         return folder_delete_instance
+    
