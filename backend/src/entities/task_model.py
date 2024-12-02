@@ -13,7 +13,7 @@ class TaskModel(BaseModel):
 
     @field_validator("status")
     def valid_status(cls, value):
-        status_list = ["completed", "not completed"]
+        status_list = ["completed", "not completed", "in process"]
         if value not in status_list:
             raise StatusNotValid()
         return value
