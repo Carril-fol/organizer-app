@@ -9,7 +9,6 @@ from flask_jwt_extended import (
     create_refresh_token,
     jwt_required,
     get_jwt_identity,
-    get_jwt,
     unset_access_cookies,
     set_access_cookies,
     set_refresh_cookies,
