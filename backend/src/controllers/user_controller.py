@@ -221,7 +221,8 @@ def refresh_token():
     """
     current_user = get_jwt_identity()
     new_access_token = create_access_token(identity=current_user)
+    new_refresh_token = create_refresh_token(identity=current_user)
     response = make_response({"access_token": new_access_token}, 200)
     set_access_cookies(response, new_access_token)
-    set_refresh_cookies(response, current_user)
+    set_refresh_cookies(response, new_refresh_token)
     return response
