@@ -8,7 +8,7 @@ class TaskModel(BaseModel):
     id: Optional[ObjectId] = Field(default_factory=ObjectId, alias="_id")
     name: str
     body: Optional[str] = None
-    status: Optional[Literal["completed", "not completed"]]
+    status: Optional[Literal["completed", "not completed", "in process"]]
     folder_id: ObjectId = Field(alias="folder_id")
 
     @field_validator("status")
