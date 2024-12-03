@@ -1,5 +1,5 @@
 import { Image } from "@nextui-org/react";
-import logo from "../../assets/images/logo-white.webp";
+import logo from "/images/logo-black.webp";
 
 const LogoInWhite = ({ width, height }) => {
   return (
