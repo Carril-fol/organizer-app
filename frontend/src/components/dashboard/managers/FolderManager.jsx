@@ -3,11 +3,21 @@ import { Folder } from "lucide-react";
 
 import FolderList from "../lists/FolderLists";
 import CreateFolderForm from "../../forms/folders/CreateFolderForm";
-import { getFolders, createFolder } from "../../../services/folderServices";
+import { getFolders, createFolder, detailFolder } from "../../../services/folderServices";
 
-const FolderManager = ({ onFolderSelect  }) => {
+const FolderManager = ({ onFolderSelect }) => {
   const [folders, setFolders] = useState([]);
   const [error, setError] = useState("");
+
+  const handleFolderSelect = async (folderId) => {
+    onFolderSelect(folderId);
+    try {
+      const response = await detailFolder(folderId);
+      return response.data;
+    } catch (error) {
+      throw new Error("Error al obtener los detalles de la carpeta:", error);
+    }
+  };
 
   const fetchFolders = async () => {
     try {
@@ -35,17 +45,11 @@ const FolderManager = ({ onFolderSelect  }) => {
     <div>
       <div className="flex w-full border-b-2 pb-4 mb-5 space-x-2 items-center">
         <Folder />
-        <h2 className="text-lg font-semibold">
-          Carpetas
-        </h2>
+        <h2 className="text-lg font-semibold">Carpetas</h2>
       </div>
       <CreateFolderForm onCreate={handleCreateFolder} />
       {error && <p className="text-red-500">{error}</p>}
-      <FolderList
-        folders={folders}
-        fetchFolders={fetchFolders}
-        onFolderSelect={onFolderSelect}
-      />
+      <FolderList folders={folders} fetchFolders={fetchFolders} onFolderSelect={handleFolderSelect} />
     </div>
   );
 };
