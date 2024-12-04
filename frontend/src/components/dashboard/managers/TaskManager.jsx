@@ -2,19 +2,15 @@ import PropTypes from "prop-types";
 
 import TaskList from "../lists/TaskList";
 
-const TaskManager = ({ tasks }) => {
+const TaskManager = ({ folderId }) => {
 
   return (
-  <div className="w-full md:w-2/3">
-    <div className="space-y-2 mb-4">
-      <TaskList tasks={tasks} />
-    </div>
-  </div>
-  )
+    <TaskList folderId={folderId} />
+  );
 }
 
 TaskManager.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.object).isRequired
-}
+  folderId: PropTypes.string.isRequired,
+};
 
 export default TaskManager;
