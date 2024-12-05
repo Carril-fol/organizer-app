@@ -1,14 +1,15 @@
-import LoggedHeader from "../../components/common/LoggedHeader";
+import LoggedNavbar from "../../components/common/LoggedNavbar";
 import FolderTaskContainer from "../../components/dashboard/container/FolderTaskContainer";
 
 const HomePage = () => {
   return (
-    <main>
-      <LoggedHeader />
-      <section className="w-screen h-screen flex justify-center items-center">
+    <div className="flex flex-col">
+      <LoggedNavbar />
+      <main>
         <FolderTaskContainer />
-      </section>
-    </main>
+      </main>
+    </div>
   );
-}
+};
+
 export default HomePage;
