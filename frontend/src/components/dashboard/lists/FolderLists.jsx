@@ -27,6 +27,7 @@ const FolderList = ({ folders, fetchFolders, onFolderSelect }) => {
     <div className="space-y-4 max-h-64 overflow-y-auto">
       {folders.map((folder) => (
         <FolderItem
+          key={folder._id}
           folder={folder}
           handleDelete={handleDelete}
           handleUpdate={handleUpdate}
