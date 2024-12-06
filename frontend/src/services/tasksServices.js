@@ -13,10 +13,10 @@ export const createTasks = (taskData, folderId) => {
   }
 };
 
-export const updateTask = (taskData, taskId) => {
+export const updateTask = async (taskData, taskId) => {
   try {
-    const response = API.put(`/tasks/api/v1/update/${taskId}`, taskData);
-    return response.data;
+    const response = await API.put(`/tasks/api/v1/update/${taskId}`, taskData);
+    return response;
   } catch (error) {
     throw new Error(error.response?.data?.msg || "Error desconocido");
   }
