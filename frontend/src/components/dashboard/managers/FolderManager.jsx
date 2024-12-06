@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Folder } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import FolderList from "../lists/FolderLists";
 import CreateFolderForm from "../../forms/folders/CreateFolderForm";
@@ -7,7 +9,6 @@ import { getFolders, createFolder, detailFolder } from "../../../services/folder
 
 const FolderManager = ({ onFolderSelect }) => {
   const [folders, setFolders] = useState([]);
-  const [error, setError] = useState("");
 
   const handleFolderSelect = async (folderId) => {
     onFolderSelect(folderId);
@@ -15,7 +16,7 @@ const FolderManager = ({ onFolderSelect }) => {
       const response = await detailFolder(folderId);
       return response.data;
     } catch (error) {
-      throw new Error("Error al obtener los detalles de la carpeta:", error);
+      toast.error("Error al obtener los detalles de la carpetas.");
     }
   };
 
@@ -24,7 +25,7 @@ const FolderManager = ({ onFolderSelect }) => {
       const response = await getFolders();
       setFolders(response.folders);
     } catch (error) {
-      setError("Error al obtener carpetas");
+      toast.error("Error al obtener carpetas");
     }
   };
 
@@ -33,7 +34,7 @@ const FolderManager = ({ onFolderSelect }) => {
       await createFolder({ name_folder });
       fetchFolders();
     } catch (error) {
-      setError("Error al crear carpeta");
+      toast.error("Error al crear carpeta");
     }
   };
 
@@ -48,8 +49,8 @@ const FolderManager = ({ onFolderSelect }) => {
         <h2 className="text-lg font-semibold">Carpetas</h2>
       </div>
       <CreateFolderForm onCreate={handleCreateFolder} />
-      {error && <p className="text-red-500">{error}</p>}
       <FolderList folders={folders} fetchFolders={fetchFolders} onFolderSelect={handleFolderSelect} />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick />
     </div>
   );
 };
