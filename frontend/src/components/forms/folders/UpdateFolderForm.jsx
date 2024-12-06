@@ -1,20 +1,7 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import {
-  Button,
-  Input,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  useDisclosure
-} from "@nextui-org/react";
-import {
-  Pencil,
-  Check,
-  X,
-  Folder
-} from "lucide-react";
+import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
+import { Pencil, Check, X, Folder } from "lucide-react";
 
 const UpdateFolderForm = ({ folder, onUpdate }) => {
   const [name_folder, setName_folder] = useState(folder.name_folder || "");
@@ -24,7 +11,7 @@ const UpdateFolderForm = ({ folder, onUpdate }) => {
     setName_folder(folder.name_folder);
   }, [folder]);
 
-  const handleSubmitUpdate = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (onUpdate) {
       await onUpdate(folder._id, name_folder);
@@ -48,7 +35,7 @@ const UpdateFolderForm = ({ folder, onUpdate }) => {
             </div>
           </ModalHeader>
           <ModalBody>
-            <form onSubmit={handleSubmitUpdate}>
+            <form onSubmit={handleSubmit}>
               <Input
                 isRequired
                 value={name_folder}
