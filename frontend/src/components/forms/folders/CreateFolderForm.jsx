@@ -9,7 +9,7 @@ const FolderForm = ({ onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await onCreate(name_folder);
-    setFolderName("");
+    setName_folder("");
   };
 
   return (
