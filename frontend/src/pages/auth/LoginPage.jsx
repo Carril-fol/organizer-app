@@ -1,14 +1,16 @@
 import LoginForm from "../../components/forms/auth/LoginForm";
-import Header from "../../components/common/Header";
+import UnLoggedNavbar from "../../components/common/UnLoggedNavbar";
 
 const LoginPage = () => {
   return (
-    <main className="min-h-screen">
-      <Header />
-      <section className="flex justify-center items-center min-h-screen">
-        <LoginForm />
-      </section>
-    </main>
+    <div>
+      <UnLoggedNavbar />
+      <main className="min-h-screen">
+        <section className="flex justify-center items-center min-h-screen">
+          <LoginForm />
+        </section>
+      </main>
+    </div>
   );
 }
 
