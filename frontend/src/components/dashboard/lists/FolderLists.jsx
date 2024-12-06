@@ -1,9 +1,6 @@
-import { Button } from "@nextui-org/react";
 import PropTypes from "prop-types";
-import { Folder } from "lucide-react";
 
-import UpdateFolderForm from "../../forms/folders/UpdateFolderForm";
-import DeleteFolderForm from "../../forms/folders/DeleteFolderForm";
+import FolderItem from "../../folders/FolderItem";
 import { updateFolder, deleteFolder } from "../../../services/folderServices";
 
 const FolderList = ({ folders, fetchFolders, onFolderSelect }) => {
@@ -29,20 +26,12 @@ const FolderList = ({ folders, fetchFolders, onFolderSelect }) => {
   return (
     <div className="space-y-4 max-h-64 overflow-y-auto">
       {folders.map((folder) => (
-        <Button
-          key={folder._id}
-          className="bg-transparent border rounded-lg flex items-center justify-between h-11 w-full"
-          onClick={() => onFolderSelect(folder._id)}
-        >
-          <div className="flex items-center space-x-2">
-            <Folder className="h-5 w-5" />
-            <p>{folder.name_folder}</p>
-          </div>
-          <div className="flex">
-            <UpdateFolderForm folder={folder} onUpdate={handleUpdate} />
-            <DeleteFolderForm folder={folder} onDelete={handleDelete} />
-          </div>
-        </Button>
+        <FolderItem
+          folder={folder}
+          handleDelete={handleDelete}
+          handleUpdate={handleUpdate}
+          onFolderSelect={onFolderSelect}
+        />
       ))}
     </div>
   );
