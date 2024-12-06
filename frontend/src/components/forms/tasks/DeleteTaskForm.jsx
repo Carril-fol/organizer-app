@@ -13,7 +13,6 @@ const DeleteTaskForm = ({ task, fetchAll }) => {
     e.preventDefault();
     try {
       const response = await deleteTask(task._id);
-      console.log(response);
       if (response?.status) {
         fetchAll();
         onClose();
@@ -24,7 +23,6 @@ const DeleteTaskForm = ({ task, fetchAll }) => {
       setError(error.response?.data?.msg || "Error desconocido al borrar la tarea.");
     }
   };
-  
 
   return (
     <>
