@@ -1,11 +1,13 @@
+import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, Select, SelectItem } from "@nextui-org/react";
+import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Pencil, Check, X, ClipboardCheck } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
 
 import { updateTask } from "../../../services/tasksServices";
 
-const UpdateTaskForm = ({ task, onUpdate }) => {
+const UpdateTaskForm = ({ task, fetchAll }) => {
   const [name, setName] = useState(task.name);
   const [body, setBody] = useState(task.body || "");
   const [status, setStatus] = useState(task.status);
@@ -15,15 +17,25 @@ const UpdateTaskForm = ({ task, onUpdate }) => {
 
   const optionsTask = ["Completed", "Not Completed", "In Process"];
 
-  const handleUpdateTask = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name.trim()) {
+      toast.error("Los campos 'Nombre de la tarea' no pueden estar vacíos.");
+      return;
+    }
+
     const taskData = { name, body, status };
     try {
-      updateTask(taskData, task._id);
-      await onUpdate()
-      onClose();
+      const response = await updateTask(taskData, task._id);
+      if (response?.status === 200) {
+        toast.success("Tarea actualizada con éxito.");
+        fetchAll();
+        onClose();
+      } else {
+        toast.error("No se pudo actualizar la tarea. Intenta nuevamente.");
+      }
     } catch (error) {
-      throw new Error("Error al actualizar la tarea:", error)
+      toast.error(error.response?.data?.msg || "Error al actualizar la tarea.");
     }
   };
 
@@ -41,19 +53,29 @@ const UpdateTaskForm = ({ task, onUpdate }) => {
             </div>
           </ModalHeader>
           <ModalBody>
-            <form className="space-y-6" onSubmit={handleUpdateTask}>
-              <Input isRequired value={name} onChange={(e) => setName(e.target.value)} />
-              <Input isRequired value={body} onChange={(e) => setBody(e.target.value)} />
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <Input
+                isRequired
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Nombre de la tarea"
+              />
+              <Textarea
+                isRequired
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                placeholder="Descripción de la tarea"
+              />
               <Select
                 isRequired
                 label="Estado de la tarea"
                 placeholder="Selecciona el estado actual"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
+                selectedKeys={new Set([status])}
+                onSelectionChange={(selected) => setStatus(Array.from(selected).join(""))}
               >
                 {optionsTask.map((option) => (
                   <SelectItem key={option} value={option}>
-                    {option}
+                    {option.charAt(0).toUpperCase() + option.slice(1).toLowerCase()}
                   </SelectItem>
                 ))}
               </Select>
@@ -70,13 +92,24 @@ const UpdateTaskForm = ({ task, onUpdate }) => {
           </ModalBody>
         </ModalContent>
       </Modal>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };
 
 UpdateTaskForm.propTypes = {
   task: PropTypes.object.isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  fetchAll: PropTypes.func.isRequired,
 };
 
 export default UpdateTaskForm;
