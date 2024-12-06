@@ -3,7 +3,6 @@ import { Book } from "lucide-react";
 
 import UpdateTaskForm from "../forms/tasks/UpdateTaskForm";
 import DeleteTaskForm from "../forms/tasks/DeleteTaskForm";
-import { getAllTasksFromFolder } from "../../services/tasksServices";
 
 const TaskItem = ({ task, fetchTasks }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -29,8 +28,8 @@ const TaskItem = ({ task, fetchTasks }) => {
         </div>
         {isHovered && (
           <div className="flex gap-2">
-            <UpdateTaskForm task={task} onUpdate={fetchTasks}/>
-            <DeleteTaskForm task={task} fetchAll={fetchTasks}/>
+            <UpdateTaskForm task={task} fetchAll={fetchTasks} />
+            <DeleteTaskForm task={task} fetchAll={fetchTasks} />
           </div>
         )}
       </div>
