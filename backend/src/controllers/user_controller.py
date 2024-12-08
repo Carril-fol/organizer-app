@@ -14,18 +14,13 @@ from flask_jwt_extended import (
     set_refresh_cookies,
     unset_jwt_cookies
 )
-from services.user_service import UserService
-from services.token_service import TokenService
-from exceptions.user_exceptions import UserNotFoundException
-from decorators.user_decorator import is_token_blacklisted
 
-# Blueprint
+from services.user_service import UserService
+from exceptions.user_exceptions import UserNotFoundException
+
 auth_blueprint = Blueprint("users", __name__, url_prefix="/users/api/v1")
 
-# Services
 user_service = UserService()
-token_service = TokenService()
-
 
 @auth_blueprint.route("/register", methods=["POST"])
 async def register():
@@ -46,16 +41,7 @@ async def register():
 
     Successful response (code 201 - CREATED):
     {
-        "msg": "User created",
-        "user": {
-            "id": "Id from the user",
-            "first_name": "First name from the user",
-            "last_name": "Last name from the user",
-            "email": "Email from the user",
-            "password": "Password from the user",
-            "confirm_password": "Confirmation from the password"
-        },
-        "access_token": "8uP9dv0czfTLY8WEma1fZyBYLzUedsXiwp31A4wQ6klpJclPYQyZDsFruLuybCd9..."
+        "msg": "Register successful"
     }
 
     Response with validation errors (code 400 - BAD REQUEST):
@@ -71,10 +57,12 @@ async def register():
         return {"error": "Missing JSON in request"}, 400
     try:
         user_created_id = await user_service.create_user(data)
-        get_user_json = await user_service.get_user_by_id(user_created_id)
-        access_token = create_access_token(get_user_json)
+        user_data = await user_service.get_user_by_id(user_created_id)
+        access_token = create_access_token(user_data)
+        refresh_token = create_refresh_token(user_data)
         response = make_response({"msg": "Register successful"}, 200)
         set_access_cookies(response, access_token)
+        set_refresh_cookies(response, refresh_token)
         return response
     except Exception as error:
         return {"error": (str(error))}, 400
@@ -126,14 +114,13 @@ async def login():
 
 @auth_blueprint.route("/detail", methods=["GET"])
 @jwt_required()
-@is_token_blacklisted
 async def detail_user_requested():
     """
     Example:
 
     GET: /users/api/v1/<user_id>
     ```
-    Header Authorization:
+    Cookie Authorization:
     {
         Authorization: "8uP9dv0czfTLY8WEma1fZyBYLzUedsX.iwp31A4wQ6klpJclPYQyZDsFruLuybCd9..."
     }
@@ -174,7 +161,7 @@ async def logout():
 
     GET: /users/api/v1/logout
     ```
-    Header Authorization:
+    Cookie Authorization:
     {
         Authorization: "8uP9dv0czfTLY8WEma1fZyBYLzUedsX.iwp31A4wQ6klpJclPYQyZDsFruLuybCd9..."
     }
@@ -191,7 +178,6 @@ async def logout():
     ```
     """
     try:
-        #await token_service.blacklist_token(token)
         response = make_response(jsonify({"msg": "Logout succesfully"}), 200)
         unset_access_cookies(response)
         unset_jwt_cookies(response)
@@ -208,7 +194,7 @@ def refresh_token():
 
     POST: /users/api/v1/refresh
     ```
-    Header data:
+    Cookie data:
     {
         "Authorization": "8uP9dv0czfTLY8WEma1fZyBYLzUedsXiwp31A4wQ6klpJclPYQyZDsFruLuybCd9..."
     }
@@ -219,10 +205,13 @@ def refresh_token():
     }
     ```
     """
-    current_user = get_jwt_identity()
-    new_access_token = create_access_token(identity=current_user)
-    new_refresh_token = create_refresh_token(identity=current_user)
-    response = make_response({"access_token": new_access_token}, 200)
-    set_access_cookies(response, new_access_token)
-    set_refresh_cookies(response, new_refresh_token)
-    return response
+    try:
+        current_user = get_jwt_identity()
+        new_access_token = create_access_token(identity=current_user)
+        new_refresh_token = create_refresh_token(identity=current_user)
+        response = make_response({"access_token": new_access_token}, 200)
+        set_access_cookies(response, new_access_token)
+        set_refresh_cookies(response, new_refresh_token)
+        return response
+    except Exception as error:
+        return make_response({"error": error}, 400)
