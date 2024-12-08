@@ -1,10 +1,8 @@
 from flask import request, Blueprint, make_response
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from utils.extensions import cache
 from services.folder_service import FolderService
 from exceptions.folder_exception import FolderNotFound
-from decorators.user_decorator import is_token_blacklisted
 from decorators.folder_decorator import is_folder_from_the_user
 
 folder_blueprint = Blueprint("folder", __name__, url_prefix="/folders/api/v1")
@@ -13,7 +11,6 @@ folder_service = FolderService()
 
 @folder_blueprint.route("/create", methods=["POST"])
 @jwt_required()
-@is_token_blacklisted
 async def create_folder():
     """
     Example:
@@ -50,8 +47,7 @@ async def create_folder():
 
 @folder_blueprint.route("/", methods=["GET"])
 @jwt_required()
-#@cache.cached(timeout=60, forced_update=True)
-def get_folders_from_user():
+async def get_folders_from_user():
     """
     Example:
 
@@ -71,7 +67,7 @@ def get_folders_from_user():
     ```
     """
     token = get_jwt_identity()
-    folders = folder_service.get_folders_from_user(token)
+    folders = await folder_service.get_folders_from_user(token)
     return make_response({"folders": folders}, 200)
 
 @folder_blueprint.route("/detail/<folder_id>", methods=["GET"])
@@ -121,11 +117,11 @@ async def detail_folder(folder_id: str):
     """
     try:
         response = await folder_service.detail_folder(folder_id)
-        return {"data": response}, 200
+        return make_response({"data": response}, 200)
     except FolderNotFound as error:
-        return {"error": str(error)}, 404
+        return make_response({"error": str(error)}, 404)
     except Exception as error:
-        return {"error": str(error)}, 400
+        return make_response({"error": str(error)}, 400)
 
 @folder_blueprint.route("/update/<folder_id>", methods=["PUT", "PATCH"])
 @jwt_required()
