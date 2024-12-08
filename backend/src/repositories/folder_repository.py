@@ -18,7 +18,7 @@ class FolderRepository(object):
         folder_founded = self.folder_collection.find_one(folder_data_dict)
         return folder_founded
     
-    def get_folders_by_user_id(self, user_id: str):
+    async def get_folders_by_user_id(self, user_id: str):
         user_data_dict = {"user_id": ObjectId(user_id)}
         folders_from_the_user = self.folder_collection.find(user_data_dict)
         return folders_from_the_user
