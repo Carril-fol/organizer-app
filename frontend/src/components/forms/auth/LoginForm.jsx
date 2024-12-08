@@ -1,34 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Input, Link } from "@nextui-org/react";
 import LogoInBlack from "../../common/LogoInBlack";
-
-import { login } from "../../../services/authServices";
-
+import useLoginForm from "../../../hooks/auth/useLoginForm";
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await login({ email, password });
-      navigate("/dashboard");
-    } catch (error) {
-      setError("Credenciales invalidas");
-    }
-  };
+  const { email, setEmail, password, setPassword, error, handleSubmit } = useLoginForm();
 
   return (
-    <form
-      method="POST"
-      className="min-w-fit px-5 py-5 rounded-xl translate-y-full animate-move-up transition-all duration-100 ease-out"
-      onSubmit={handleSubmit}
-    >
+    <form method="POST" className="min-w-fit px-5 py-5 rounded-xl translate-y-full animate-move-up transition-all duration-100 ease-out" onSubmit={handleSubmit}>
       <div className="flex max-w-full justify-center">
         <div className="min-w-80 flex justify-center">
           <div className="flex flex-col justify-center">
@@ -48,11 +26,11 @@ const LoginForm = () => {
             )}
             <div className="py-2">
               <Input
+                isRequired
                 label="Email"
                 type="text"
                 variant="underlined"
                 className="mb-1"
-                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -63,7 +41,7 @@ const LoginForm = () => {
                 type="password"
                 variant="underlined"
                 className="mb-1"
-                required
+                isRequired
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
