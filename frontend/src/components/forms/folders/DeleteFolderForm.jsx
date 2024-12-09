@@ -1,22 +1,19 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
 import { Folder, Trash2, X } from "lucide-react";
-import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
+import {
+  Button,
+  Input,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
+} from "@nextui-org/react";
+import useDeleteFolderForm from "../../../hooks/folders/useDeleteFolderForm";
 
 const DeleteFolderForm = ({ folder, onDelete }) => {
-  const [name_folder, setFolderName] = useState(folder.name_folder);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  useEffect(() => {
-    setFolderName(folder.name_folder);
-  }, [folder]);
-
-  const handleSubmitDelete = async (e) => {
-    e.preventDefault();
-    await onDelete(folder._id);
-    window.location.reload();
-    onClose();
-  };
+  const { name_folder, handleSubmitDelete } = useDeleteFolderForm({ folder, onDelete, onClose });
 
   return (
     <>
