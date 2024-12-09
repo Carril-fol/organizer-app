@@ -1,17 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { LogOut, MenuIcon } from "lucide-react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
-import { LogOut, UserRoundCog, MenuIcon } from 'lucide-react';
 
 import LogoInBlack from "./LogoInBlack";
-import { logout } from "../../services/authServices";
+import useLogout from "../../hooks/auth/useLogout";
 
 const LoggedNavbar = () => {
-  const navigate = useNavigate();
-
-  const handleSubmit = async () => {
-    await logout();
-    navigate("/auth/login");
-  };
+  const { handleLogout } = useLogout();
 
   return (
     <header className="mt-2 flex w-screen justify-between items-center px-4 py-2">
@@ -27,9 +21,10 @@ const LoggedNavbar = () => {
             </Button>
           </DropdownTrigger>
           <DropdownMenu>
-            <DropdownItem key="delete" className="text-danger" color="danger">
-              <Button onClick={handleSubmit} className="flex items-center font-bold text-gray-800 transition-colors bg-transparent">
+            <DropdownItem key="logout" className="text-danger" color="danger">
+              <Button onClick={handleLogout} className="flex items-center font-bold text-gray-800 transition-colors bg-transparent justify-center">
                 <LogOut className="mr-1" />
+                Cerrar sesión
               </Button>
             </DropdownItem>
           </DropdownMenu>
