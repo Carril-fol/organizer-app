@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { Folder } from "lucide-react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import FolderList from "../lists/FolderLists";
 import CreateFolderForm from "../../forms/folders/CreateFolderForm";
@@ -50,7 +48,6 @@ const FolderManager = ({ onFolderSelect }) => {
       </div>
       <CreateFolderForm onCreate={handleCreateFolder} />
       <FolderList folders={folders} fetchFolders={fetchFolders} onFolderSelect={handleFolderSelect} />
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick />
     </div>
   );
 };
