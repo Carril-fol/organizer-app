@@ -1,5 +1,7 @@
 import './styles/App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import LandingPage from './pages/core/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
@@ -15,7 +17,19 @@ function App() {
         <Route path="auth/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<HomePage />} />
       </Routes>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </BrowserRouter>
   );
 }
+
 export default App;
