@@ -6,7 +6,7 @@ const urlAuth = (endpoint) => {
 
 export const register = async (userData) => {
   try {
-    await API.post(urlAuth("register"), userData);
+    return await API.post(urlAuth("register"), userData);
   } catch (error) {
     const errorMessage = "Verifique los datos introducidos";
     throw new Error(errorMessage);
@@ -15,7 +15,7 @@ export const register = async (userData) => {
 
 export const login = async (userData) => {
   try {
-    await API.post(urlAuth("login"), userData, { withCredentials: true });
+    return await API.post(urlAuth("login"), userData, { withCredentials: true });
   } catch (error) {
     const errorMessage = "Crendenciales invalidas";
     throw new Error(errorMessage);
