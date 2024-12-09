@@ -1,16 +1,10 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { Input, Button } from "@nextui-org/react";
 import { Plus } from "lucide-react";
+import useCreateFolderForm from "../../../hooks/folders/useCreateFolderForm";
 
-const FolderForm = ({ onCreate }) => {
-  const [name_folder, setName_folder] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await onCreate(name_folder);
-    setName_folder("");
-  };
+const CreateFolderForm = ({ onCreate }) => {
+  const { name_folder, setName_folder, handleSubmit } = useCreateFolderForm(onCreate);
 
   return (
     <div className="flex mb-4">
@@ -33,8 +27,8 @@ const FolderForm = ({ onCreate }) => {
   );
 }
 
-FolderForm.propTypes = {
+CreateFolderForm.propTypes = {
   onCreate: PropTypes.func.isRequired,
 }
 
-export default FolderForm;
+export default CreateFolderForm;
