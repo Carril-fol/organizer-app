@@ -1,36 +1,31 @@
-import { useState } from "react";
-import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, Select, SelectItem } from "@nextui-org/react";
+import {
+  Button,
+  Input,
+  Textarea,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 import { Plus, ClipboardList, Check } from "lucide-react";
-
-import { createTasks } from "../../../services/tasksServices";
+import useCreateTaskForm from "../../../hooks/tasks/useCreateTaskForm";
 
 const CreateTaskForm = ({ folderId, onTaskCreated }) => {
-  const [name, setName] = useState("");
-  const [body, setBody] = useState("");
-  const [status, setStatus] = useState("");
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [error, setError] = useState("");
-
   const optionsTask = ["Completed", "Not Completed", "In Process"];
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const taskData = { name, body, status };
-      const response = await createTasks(taskData, folderId);
-      if (response.status == 201) {
-        onTaskCreated();
-      }
-      setName("");
-      setBody("");
-      setStatus("");
-      onClose();
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    name,
+    body,
+    status,
+    error,
+    setName,
+    setBody,
+    setStatus,
+    handleSubmit,
+  } = useCreateTaskForm({ folderId, onTaskCreated, onClose });
 
   return (
     <>
@@ -58,16 +53,14 @@ const CreateTaskForm = ({ folderId, onTaskCreated }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Escribe el título de la tarea"
-                required
               />
-              <Input
+              <Textarea
                 type="text"
                 label="Descripción"
                 name="body"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 placeholder="Escribe una descripción"
-                required
               />
               <Select
                 isRequired
@@ -76,7 +69,6 @@ const CreateTaskForm = ({ folderId, onTaskCreated }) => {
                 name="status"
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                required
               >
                 {optionsTask.map((option) => (
                   <SelectItem key={option} value={option}>
