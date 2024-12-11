@@ -1,30 +1,11 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { ClipboardList } from 'lucide-react';
-
-import Task from "../../tasks/Task";
-import CreateTaskForm from "../../forms/tasks/CreateTaskForm";
-import { getAllTasksFromFolder } from "../../../services/tasksServices";
+import { ClipboardList } from "lucide-react";
+import Task from "./Task";
+import CreateTaskForm from "../forms/tasks/CreateTaskForm";
+import useTaskList from "../../hooks/tasks/useTaskList";
 
 const TaskList = ({ folderId }) => {
-  const [tasks, setTasks] = useState([]);
-  const hasTasks = tasks.length > 0;
-  const isScrollable = tasks.length > 5;
-
-  const fetchTasks = async () => {
-    try {
-      const response = await getAllTasksFromFolder(folderId);
-      setTasks(response.tasks);
-    } catch (error) {
-      throw new Error("Error al obtener las tareas de la tarea", error);
-    }
-  }
-
-  useEffect(() => {
-    if (folderId) {
-      fetchTasks();
-    }
-  }, [folderId]);
+  const { tasks, hasTasks, isScrollable, isLoading, error, fetchTasks } = useTaskList(folderId);
 
   return (
     <div className="w-full max-w-full">
@@ -33,7 +14,9 @@ const TaskList = ({ folderId }) => {
         <h2 className="text-lg font-semibold">Lista de Tareas</h2>
       </div>
       <CreateTaskForm folderId={folderId} onTaskCreated={fetchTasks} />
-      {
+      {isLoading && <p>Cargando tareas...</p>}
+      {error && <p className="text-red-600">{error}</p>}
+      {!isLoading && !error && (
         hasTasks ? (
           <div className={`flex flex-col gap-5 ${isScrollable ? "overflow-y-auto max-h-[calc(100vh-200px)]" : ""}`}>
             <Task tasks={tasks} fetchTasks={fetchTasks} />
@@ -41,7 +24,7 @@ const TaskList = ({ folderId }) => {
         ) : (
           <p>No hay tareas disponibles.</p>
         )
-      }
+      )}
     </div>
   );
 };

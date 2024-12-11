@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-import FolderItem from "../../folders/FolderItem";
-import { updateFolder, deleteFolder } from "../../../services/folderServices";
+import FolderItem from "./FolderItem";
+import { updateFolder, deleteFolder } from "../../services/folderServices";
 
 const FolderList = ({ folders, fetchFolders, onFolderSelect }) => {
 

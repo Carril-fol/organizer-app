@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import TaskList from "../lists/TaskList";
+import TaskList from "./TaskList";
 
 const TaskManager = ({ folderId }) => {
 
