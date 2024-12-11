@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Book } from "lucide-react";
 
-import UpdateTaskForm from "../forms/tasks/UpdateTaskForm";
-import DeleteTaskForm from "../forms/tasks/DeleteTaskForm";
+import UpdateTaskForm from "./forms/UpdateTaskForm";
+import DeleteTaskForm from "./forms/DeleteTaskForm";
 
 const TaskItem = ({ task, fetchTasks }) => {
   const [isHovered, setIsHovered] = useState(false);
