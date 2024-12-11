@@ -1,6 +1,6 @@
 import { Button, Input, Link } from "@nextui-org/react";
-import LogoInBlack from "../../common/LogoInBlack";
-import useLoginForm from "../../../hooks/auth/useLoginForm";
+import LogoInBlack from "../common/LogoInBlack";
+import useLoginForm from "../../hooks/auth/useLoginForm";
 
 const LoginForm = () => {
   const { email, setEmail, password, setPassword, error, handleSubmit } = useLoginForm();

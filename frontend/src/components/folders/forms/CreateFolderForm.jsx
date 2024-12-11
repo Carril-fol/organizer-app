@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { Input, Button } from "@nextui-org/react";
 import { Plus } from "lucide-react";
+import { Input, Button } from "@nextui-org/react";
 import useCreateFolderForm from "../../../hooks/folders/useCreateFolderForm";
 
 const CreateFolderForm = ({ onCreate }) => {
