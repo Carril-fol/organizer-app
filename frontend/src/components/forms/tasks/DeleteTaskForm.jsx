@@ -1,28 +1,11 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
 import { Trash2, Check, X, Book } from "lucide-react";
-
-import { deleteTask } from "../../../services/tasksServices";
+import useDeleteTaskForm from "../../../hooks/tasks/useDeleteTaskForm";
 
 const DeleteTaskForm = ({ task, fetchAll }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await deleteTask(task._id);
-      if (response?.status) {
-        fetchAll();
-        onClose();
-      } else {
-        setError("No se pudo eliminar la tarea. Intenta nuevamente.");
-      }
-    } catch (error) {
-      setError(error.response?.data?.msg || "Error desconocido al borrar la tarea.");
-    }
-  };
+  const { error, handleSubmit } = useDeleteTaskForm({ task, fetchAll, onClose });
 
   return (
     <>
@@ -40,8 +23,8 @@ const DeleteTaskForm = ({ task, fetchAll }) => {
           <ModalBody>
             <form className="space-y-6" onSubmit={handleSubmit}>
               <Input isDisabled value={task.name} />
-              <Input isDisabled value={task.body} />
-              <Input isDisabled value={task.status} />
+              <Input isDisabled value={task.body || "Sin descripción"} />
+              <Input isDisabled value={task.status || "Sin estado"} />
               {error && <p className="text-red-600">{error}</p>}
               <div className="flex justify-end gap-2 mt-4">
                 <Button variant="ghost" onClick={onClose}>
@@ -61,7 +44,7 @@ const DeleteTaskForm = ({ task, fetchAll }) => {
 
 DeleteTaskForm.propTypes = {
   task: PropTypes.object.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  fetchAll: PropTypes.func.isRequired,
 };
 
 export default DeleteTaskForm;
