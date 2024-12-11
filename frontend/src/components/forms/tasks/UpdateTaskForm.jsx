@@ -1,43 +1,22 @@
 import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, Select, SelectItem, Textarea } from "@nextui-org/react";
 import { Pencil, Check, X, ClipboardCheck } from "lucide-react";
-import { ToastContainer, toast } from "react-toastify";
-
-import { updateTask } from "../../../services/tasksServices";
+import useUpdateTaskForm from "../../../hooks/tasks/useUpdateTaskForm";
 
 const UpdateTaskForm = ({ task, fetchAll }) => {
-  const [name, setName] = useState(task.name);
-  const [body, setBody] = useState(task.body || "");
-  const [status, setStatus] = useState(task.status);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [error, setError] = useState("");
+  const {
+    name,
+    body,
+    status,
+    setName,
+    setBody,
+    setStatus,
+    handleSubmit,
+  } = useUpdateTaskForm({ task, fetchAll, onClose });
 
   const optionsTask = ["Completed", "Not Completed", "In Process"];
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!name.trim()) {
-      toast.error("Los campos 'Nombre de la tarea' no pueden estar vacíos.");
-      return;
-    }
-
-    const taskData = { name, body, status };
-    try {
-      const response = await updateTask(taskData, task._id);
-      if (response?.status === 200) {
-        toast.success("Tarea actualizada con éxito.");
-        fetchAll();
-        onClose();
-      } else {
-        toast.error("No se pudo actualizar la tarea. Intenta nuevamente.");
-      }
-    } catch (error) {
-      toast.error(error.response?.data?.msg || "Error al actualizar la tarea.");
-    }
-  };
 
   return (
     <>
@@ -79,7 +58,6 @@ const UpdateTaskForm = ({ task, fetchAll }) => {
                   </SelectItem>
                 ))}
               </Select>
-              {error && <p className="text-red-600">{error}</p>}
               <div className="flex justify-end gap-2 mt-4">
                 <Button variant="ghost" onClick={onClose}>
                   <X />
@@ -92,17 +70,6 @@ const UpdateTaskForm = ({ task, fetchAll }) => {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </>
   );
 };
