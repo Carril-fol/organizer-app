@@ -1,6 +1,7 @@
 import { Folder } from "lucide-react";
+
 import FolderList from "./FolderLists";
-import CreateFolderForm from "../forms/folders/CreateFolderForm";
+import CreateFolderForm from "../folders/forms/CreateFolderForm";
 import useFolderManager from "../../hooks/folders/useFolderManager";
 
 const FolderManager = ({ onFolderSelect }) => {

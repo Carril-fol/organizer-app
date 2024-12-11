@@ -1,8 +1,8 @@
 import { Button } from "@nextui-org/react";
 import { Folder } from "lucide-react";
 
-import UpdateFolderForm from "../forms/folders/UpdateFolderForm";
-import DeleteFolderForm from "../forms/folders/DeleteFolderForm";
+import UpdateFolderForm from "./forms/UpdateFolderForm";
+import DeleteFolderForm from "./forms/DeleteFolderForm";
 
 const FolderItem = ({ folder, handleDelete, handleUpdate, onFolderSelect }) => {
   return (
