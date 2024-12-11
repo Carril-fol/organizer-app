@@ -1,12 +1,12 @@
 import LoggedNavbar from "../../components/common/LoggedNavbar";
-import FolderTaskContainer from "../../components/dashboard/container/FolderTaskContainer";
+import Dashboard from "../../components/dashboard/Dashboard";
 
 const HomePage = () => {
   return (
     <div className="flex flex-col">
       <LoggedNavbar />
       <main>
-        <FolderTaskContainer />
+        <Dashboard />
       </main>
     </div>
   );
