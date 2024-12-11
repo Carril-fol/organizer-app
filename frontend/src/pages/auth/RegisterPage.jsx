@@ -1,4 +1,4 @@
-import RegisterForm from "../../components/forms/auth/RegisterForm";
+import RegisterForm from "../../components/auth/RegisterForm";
 import UnLoggedNavbar from "../../components/common/UnLoggedNavbar";
 
 const RegisterPage = () => {

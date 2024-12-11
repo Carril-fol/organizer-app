@@ -1,4 +1,4 @@
-import LoginForm from "../../components/forms/auth/LoginForm";
+import LoginForm from "../../components/auth/LoginForm";
 import UnLoggedNavbar from "../../components/common/UnLoggedNavbar";
 
 const LoginPage = () => {
