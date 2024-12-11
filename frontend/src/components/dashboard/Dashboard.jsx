@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import FolderManager from "../managers/FolderManager";
-import TaskManager from "../managers/TaskManager";
+import FolderManager from "../folders/FolderManager";
+import TaskManager from "../tasks/TaskManager";
 
-const FolderTaskContainer = () => {
+const Dashboard = () => {
   const [selectedFolder, setSelectedFolder] = useState("");
 
   return (
@@ -23,4 +23,4 @@ const FolderTaskContainer = () => {
     </section>
   );
 }
-export default FolderTaskContainer;
+export default Dashboard;
