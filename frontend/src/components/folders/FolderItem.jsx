@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Button } from "@nextui-org/react";
 import { Folder } from "lucide-react";
 
