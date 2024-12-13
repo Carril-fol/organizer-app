@@ -38,7 +38,7 @@ export const updateFolder = async (id, name_folder) => {
 export const deleteFolder = async (id) => {
   try {
     const response = await API.delete(urlFolderWithId({ endpoint: "delete", id: id }));
-    return response.data;
+    return response;
   } catch (error) {
     throw new Error(error.response?.data?.msg || "Error desconocido");
   }
