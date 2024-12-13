@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const useUpdateFolderForm = ({ folder, onUpdate, onClose }) => {
+import { updateFolder } from "../../services/folderServices";
+
+const useUpdateFolderForm = ({ folder, fetchFolders, onClose }) => {
   const [name_folder, setNameFolder] = useState("");
 
   useEffect(() => {
@@ -20,11 +22,12 @@ const useUpdateFolderForm = ({ folder, onUpdate, onClose }) => {
     }
 
     try {
-      await onUpdate(folder._id, name_folder.trim());
-      toast.success("Carpeta actualizada correctamente.");  // Asegúrate de que el toast de éxito se llame
+      await updateFolder(folder._id, name_folder.trim());
+      toast.success("Carpeta actualizada correctamente.");
+      fetchFolders();
       onClose();
     } catch (error) {
-      toast.error("Error al actualizar la carpeta.");  // Si algo sale mal, mostramos un error
+      toast.error("Error al actualizar la carpeta.");
     }
   };
 

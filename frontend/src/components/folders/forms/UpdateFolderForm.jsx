@@ -11,9 +11,9 @@ import {
 import { Pencil, Check, X, Folder } from "lucide-react";
 import useUpdateFolderForm from "../../../hooks/folders/useUpdateFolderForm";
 
-const UpdateFolderForm = ({ folder, onUpdate }) => {
+const UpdateFolderForm = ({ folder, fetchFolders }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { name_folder, setNameFolder, handleSubmitUpdate } = useUpdateFolderForm({ folder, onUpdate, onClose });
+  const { name_folder, setNameFolder, handleSubmitUpdate } = useUpdateFolderForm({ folder, fetchFolders, onClose });
 
   return (
     <>
@@ -59,7 +59,7 @@ UpdateFolderForm.propTypes = {
     _id: PropTypes.string.isRequired,
     name_folder: PropTypes.string.isRequired,
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  fetchFolders: PropTypes.func.isRequired,
 };
 
 export default UpdateFolderForm;
