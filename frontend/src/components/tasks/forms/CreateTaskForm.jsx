@@ -93,4 +93,10 @@ const CreateTaskForm = ({ folderId, onTaskCreated }) => {
   );
 };
 
+CreateTaskForm.propTypes = {
+  folderId: PropTypes.object.isRequired,
+  onTaskCreated: PropTypes.func.isRequired,
+};
+
+
 export default CreateTaskForm;
