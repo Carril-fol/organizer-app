@@ -1,27 +1,8 @@
 import PropTypes from "prop-types";
 
 import FolderItem from "./FolderItem";
-import { updateFolder, deleteFolder } from "../../services/folderServices";
 
-const FolderList = ({ folders, fetchFolders, onFolderSelect }) => {
-
-  const handleUpdate = async (id, name_folder) => {
-    try {
-      await updateFolder(id, name_folder);
-      fetchFolders();
-    } catch (error) {
-      throw new Error("Error al actualizar la carpeta:", error);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteFolder(id);
-      fetchFolders();
-    } catch (error) {
-      throw new Error("Error al borrar la carpeta:", error)
-    }
-  }
+const FolderList = ({ folders, onFolderSelect, fetchFolders }) => {
 
   return (
     <div className="space-y-4 max-h-64 overflow-y-auto">
@@ -29,8 +10,7 @@ const FolderList = ({ folders, fetchFolders, onFolderSelect }) => {
         <FolderItem
           key={folder._id}
           folder={folder}
-          handleDelete={handleDelete}
-          handleUpdate={handleUpdate}
+          fetchFolders={fetchFolders}
           onFolderSelect={onFolderSelect}
         />
       ))}
