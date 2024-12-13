@@ -4,7 +4,7 @@ import { Folder } from "lucide-react";
 import UpdateFolderForm from "./forms/UpdateFolderForm";
 import DeleteFolderForm from "./forms/DeleteFolderForm";
 
-const FolderItem = ({ folder, handleDelete, handleUpdate, onFolderSelect }) => {
+const FolderItem = ({ folder, fetchFolders, onFolderSelect }) => {
   return (
     <Button
       key={folder._id}
@@ -16,11 +16,21 @@ const FolderItem = ({ folder, handleDelete, handleUpdate, onFolderSelect }) => {
         <p>{folder.name_folder}</p>
       </div>
       <div className="flex">
-        <UpdateFolderForm folder={folder} onUpdate={handleUpdate} />
-        <DeleteFolderForm folder={folder} onDelete={handleDelete} />
+        <UpdateFolderForm folder={folder} fetchFolders={fetchFolders} />
+        <DeleteFolderForm folder={folder} fetchFolders={fetchFolders} />
       </div>
     </Button>
   );
 }
+
+FolderItem.propTypes = {
+  folder: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name_folder: PropTypes.string.isRequired,
+  }).isRequired,
+  fetchFolders: PropTypes.func.isRequired,
+  onFolderSelect: PropTypes.func.isRequired
+};
+
 
 export default FolderItem;
