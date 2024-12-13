@@ -11,9 +11,9 @@ import {
 } from "@nextui-org/react";
 import useDeleteFolderForm from "../../../hooks/folders/useDeleteFolderForm";
 
-const DeleteFolderForm = ({ folder, onDelete }) => {
+const DeleteFolderForm = ({ folder, fetchFolders }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { name_folder, handleSubmitDelete } = useDeleteFolderForm({ folder, onDelete, onClose });
+  const { name_folder, handleSubmitDelete } = useDeleteFolderForm({ folder, fetchFolders, onClose });
 
   return (
     <>
@@ -55,7 +55,7 @@ DeleteFolderForm.propTypes = {
     _id: PropTypes.string.isRequired,
     name_folder: PropTypes.string.isRequired,
   }).isRequired,
-  onDelete: PropTypes.func.isRequired,
+  fetchFolders: PropTypes.func.isRequired,
 };
 
 export default DeleteFolderForm;

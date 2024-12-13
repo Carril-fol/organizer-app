@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { deleteFolder } from "../../services/folderServices";
 
-const useDeleteFolderForm = ({ folder, onDelete, onClose }) => {
+const useDeleteFolderForm = ({ folder, fetchFolders, onClose }) => {
   const [name_folder, setNameFolder] = useState("");
 
   useEffect(() => {
@@ -9,10 +10,16 @@ const useDeleteFolderForm = ({ folder, onDelete, onClose }) => {
 
   const handleSubmitDelete = async (e) => {
     e.preventDefault();
-    await onDelete(folder._id);
-    onClose();
+    try {
+      const response = await deleteFolder(folder._id);
+      if (response?.status == 200) {
+        fetchFolders();
+        onClose();
+      }
+    } catch (error) {
+      throw new Error("Error al eliminar la carpeta:", error);
+    }
   };
-
   return { name_folder, handleSubmitDelete };
 };
 
