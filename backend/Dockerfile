@@ -1,12 +1,22 @@
-FROM python:3-alpine
+FROM python:3.10-alpine
 
-RUN apk add --no-cache python3-dev \
-  && pip3 install --upgrade pip
+# Instala dependencias necesarias para Python y evita errores
+RUN apk add --no-cache gcc musl-dev libffi-dev openssl-dev python3-dev
 
-WORKDIR /restful-organizer
+# Actualiza pip
+RUN pip3 install --upgrade pip
 
-COPY . /restful-organizer
+# Define el directorio de trabajo
+WORKDIR /backend
 
-RUN pip3 --no-cache-dir install -r requirements.txt
+# Copia los archivos al contenedor
+COPY . /backend
 
+# Instala las dependencias
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Expone el puerto
+EXPOSE 8000
+
+# Comando por defecto para ejecutar la aplicación
 CMD ["python", "src/app.py"]
