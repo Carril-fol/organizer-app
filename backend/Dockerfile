@@ -9,14 +9,14 @@ RUN pip3 install --upgrade pip
 # Establece el directorio de trabajo
 WORKDIR /backend
 
-# Copia el archivo requirements.txt y las dependencias primero
-COPY requirements.txt /backend/
+# Copia el archivo requirements.txt desde el directorio backend
+COPY backend/requirements.txt /backend/
 
 # Instala las dependencias del proyecto
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Copia el resto del proyecto
-COPY . /backend
+# Copia el resto del proyecto (código fuente)
+COPY backend/ /backend/
 
 # Expone el puerto de la aplicación
 EXPOSE 8000
