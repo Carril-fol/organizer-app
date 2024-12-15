@@ -18,7 +18,7 @@ export const createFolder = async (folderData) => {
 
 export const getFolders = async () => {
   try {
-    const response = await API.get(urlFolder("/"));
+    const response = await API.get(urlFolder(""));
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.msg || "Error desconocido");
