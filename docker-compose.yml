@@ -1,18 +1,42 @@
-version: '3.8'
-
 services:
   backend:
+    container_name: backend-organizer-app
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend-organizer-app
     ports:
       - "8000:8000"
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`localhost`) && PathPrefix(`/backend`)"
 
   frontend:
+    container_name: frontend-organizer-app
     build:
       context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend-organizer-app
     ports:
       - "5173:5173"
+    networks:
+      - app-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`localhost`)"
+
+  traefik:
+    image: traefik:v2.5
+    container_name: traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
