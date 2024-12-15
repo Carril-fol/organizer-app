@@ -1,9 +1,6 @@
-import asyncio
-from hypercorn.config import Config
-from hypercorn.asyncio import serve
+from asgiref.wsgi import WsgiToAsgi
+import uvicorn
 
-def start_server(app, mode="wsgi"):
-    config = Config()
-    config.bind = ["0.0.0.0:8000"]
-    config.use_reloader = False
-    asyncio.run(serve(app, config))
+def start_server(app_wsgi):
+    app_asgi = WsgiToAsgi(app_wsgi)
+    uvicorn.run(app_asgi, host="0.0.0.0", port=8000)
