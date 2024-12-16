@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    historyApiFallback: true,
-  }
+  base: '/', // Asegura que las rutas comiencen desde la raíz
+  build: {
+    outDir: 'dist', // Vercel toma por defecto la carpeta dist
+  },
 });
