@@ -1,14 +1,24 @@
+# Etapa 1: Construcción de la aplicación
 FROM node:18 AS builder
 
+WORKDIR /app
 
-COPY package.json ./
-
+COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
+RUN npm run build
 
-RUN npm install --force
+# Etapa 2: Servir la aplicación con Nginx
+FROM nginx:alpine
 
-EXPOSE 5173
+# Copiar los archivos de construcción generados a la carpeta de Nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-CMD ["npm", "run", "preview"]
+# Copiar archivo de configuración de Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Exponer el puerto que Render asignará (en lugar de 80)
+EXPOSE $PORT
+
+CMD ["nginx", "-g", "daemon off;"]
