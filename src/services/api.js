@@ -1,10 +1,10 @@
 import axios from "axios";
 import { refreshTokens } from "./authServices";
 
-const urlBackend = import.meta.env.BACKEND_URL;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const API = axios.create({
-  baseURL: urlBackend,
+  baseURL: backendUrl,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
