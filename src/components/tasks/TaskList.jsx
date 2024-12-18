@@ -1,4 +1,4 @@
-import Task from "./Task";
+import { Task } from "./Task";
 
 const TaskList = ({ isScrollable, isLoading, error, hasTasks, tasks, fetchTasks }) => {
   return (
@@ -18,4 +18,4 @@ const TaskList = ({ isScrollable, isLoading, error, hasTasks, tasks, fetchTasks 
   );
 }
 
-export default TaskList;
+export { TaskList };

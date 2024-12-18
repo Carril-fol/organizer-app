@@ -34,4 +34,4 @@ const useUpdateFolderForm = ({ folder, fetchFolders, onClose }) => {
   return { name_folder, setNameFolder, handleSubmitUpdate };
 };
 
-export default useUpdateFolderForm;
+export { useUpdateFolderForm };

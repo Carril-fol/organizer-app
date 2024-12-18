@@ -9,7 +9,7 @@ import {
   ModalBody,
   useDisclosure,
 } from "@nextui-org/react";
-import useDeleteFolderForm from "../../../hooks/folders/useDeleteFolderForm";
+import { useDeleteFolderForm } from "../../../hooks/folders/useDeleteFolderForm";
 
 const DeleteFolderForm = ({ folder, fetchFolders }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

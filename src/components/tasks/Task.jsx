@@ -1,4 +1,4 @@
-import TaskItem from "./TaskItem";
+import { TaskItem } from "./TaskItem";
 
 const Task = ({ tasks, fetchTasks }) => {
   if (tasks.length === 0) {
@@ -14,5 +14,5 @@ const Task = ({ tasks, fetchTasks }) => {
   );
 };
 
-export default Task;
+export { Task };
 

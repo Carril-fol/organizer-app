@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Plus } from "lucide-react";
 import { Input, Button } from "@nextui-org/react";
-import useCreateFolderForm from "../../../hooks/folders/useCreateFolderForm";
+import { useCreateFolderForm } from "../../../hooks/folders/useCreateFolderForm";
 
 const CreateFolderForm = ({ onCreate }) => {
   const { name_folder, setName_folder, handleSubmit } = useCreateFolderForm(onCreate);
@@ -31,4 +31,4 @@ CreateFolderForm.propTypes = {
   onCreate: PropTypes.func.isRequired,
 }
 
-export default CreateFolderForm;
+export { CreateFolderForm };

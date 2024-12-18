@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
-import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
+import { 
+  Button, 
+  Input, 
+  Modal, 
+  ModalContent, 
+  ModalHeader, 
+  ModalBody, 
+  useDisclosure 
+} from "@nextui-org/react";
 import { Trash2, Check, X, Book } from "lucide-react";
-import useDeleteTaskForm from "../../../hooks/tasks/useDeleteTaskForm";
+import { useDeleteTaskForm } from "../../../hooks/tasks/useDeleteTaskForm";
 
 const DeleteTaskForm = ({ task, fetchAll }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

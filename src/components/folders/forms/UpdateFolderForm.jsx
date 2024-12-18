@@ -9,7 +9,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { Pencil, Check, X, Folder } from "lucide-react";
-import useUpdateFolderForm from "../../../hooks/folders/useUpdateFolderForm";
+import { useUpdateFolderForm } from "../../../hooks/folders/useUpdateFolderForm";
 
 const UpdateFolderForm = ({ folder, fetchFolders }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

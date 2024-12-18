@@ -12,7 +12,7 @@ const useLoginForm = () => {
     setError("");
     try {
       await login({ email, password });
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       setError("Credenciales inválidas");
     }
@@ -33,4 +33,4 @@ const useLoginForm = () => {
   };
 };
 
-export default useLoginForm;
+export { useLoginForm };

@@ -1,6 +1,6 @@
 import { Button, Input } from "@nextui-org/react";
 import LogoInBlack from "../common/LogoInBlack";
-import useRegisterForm from "../../hooks/auth/useRegisterForm";
+import { useRegisterForm } from "../../hooks/auth/useRegisterForm";
 
 const RegisterForm = () => {
   const {

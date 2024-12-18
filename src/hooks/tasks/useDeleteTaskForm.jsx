@@ -28,4 +28,4 @@ const useDeleteTaskForm = ({ task, fetchAll, onClose }) => {
   };
 };
 
-export default useDeleteTaskForm;
+export { useDeleteTaskForm };

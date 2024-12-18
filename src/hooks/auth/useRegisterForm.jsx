@@ -48,4 +48,4 @@ const useRegisterForm = () => {
   };
 };
 
-export default useRegisterForm;
+export { useRegisterForm };

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import FolderItem from "./FolderItem";
+import { FolderItem } from "./FolderItem";
 
 const FolderList = ({ folders, onFolderSelect, fetchFolders }) => {
 
@@ -23,4 +23,4 @@ FolderList.propTypes = {
   onFolderSelect: PropTypes.func.isRequired,
 };
 
-export default FolderList;
+export { FolderList };

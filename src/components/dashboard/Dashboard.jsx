@@ -1,7 +1,8 @@
 import { useState } from "react";
+import Cookie from "js-cookies";
 
-import FolderManager from "../folders/FolderManager";
-import TaskManager from "../tasks/TaskManager";
+import { FolderManager } from "../folders/FolderManager";
+import { TaskManager } from "../tasks/TaskManager";
 
 const Dashboard = () => {
   const [selectedFolder, setSelectedFolder] = useState("");

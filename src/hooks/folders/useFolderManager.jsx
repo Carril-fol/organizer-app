@@ -45,4 +45,4 @@ const useFolderManager = () => {
   };
 };
 
-export default useFolderManager;
+export { useFolderManager };

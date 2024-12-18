@@ -17,4 +17,4 @@ const useCreateFolderForm = (onCreate) => {
   };
 };
 
-export default useCreateFolderForm;
+export { useCreateFolderForm };

@@ -12,7 +12,7 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import { Plus, ClipboardList, Check } from "lucide-react";
-import useCreateTaskForm from "../../../hooks/tasks/useCreateTaskForm";
+import { useCreateTaskForm } from "../../../hooks/tasks/useCreateTaskForm";
 
 const CreateTaskForm = ({ folderId, onTaskCreated }) => {
   const optionsTask = ["Completed", "Not Completed", "In Process"];

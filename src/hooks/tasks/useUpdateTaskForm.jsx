@@ -42,4 +42,4 @@ const useUpdateTaskForm = ({ task, fetchAll, onClose }) => {
   };
 };
 
-export default useUpdateTaskForm;
+export { useUpdateTaskForm };

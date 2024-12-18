@@ -34,4 +34,4 @@ FolderItem.propTypes = {
 };
 
 
-export default FolderItem;
+export { FolderItem };

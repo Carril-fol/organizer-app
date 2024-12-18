@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { ClipboardList } from "lucide-react";
 
-import TaskList from "./TaskList";
+import { TaskList } from "./TaskList";
 import CreateTaskForm from "../tasks/forms/CreateTaskForm";
-import useTaskList from "../../hooks/tasks/useTaskList";
+import { useTaskList } from "../../hooks/tasks/useTaskList";
 
 const TaskManager = ({ folderId }) => {
   const { tasks, hasTasks, isScrollable, isLoading, error, fetchTasks } = useTaskList(folderId);
@@ -31,4 +31,4 @@ TaskList.propTypes = {
   folderId: PropTypes.string.isRequired,
 };
 
-export default TaskManager;
+export { TaskManager };

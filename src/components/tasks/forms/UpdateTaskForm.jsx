@@ -1,8 +1,19 @@
 import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
-import { Button, Input, Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, Select, SelectItem, Textarea } from "@nextui-org/react";
+import { 
+  Button, 
+  Input, 
+  Modal, 
+  ModalContent, 
+  ModalHeader, 
+  ModalBody, 
+  useDisclosure, 
+  Select, 
+  SelectItem, 
+  Textarea
+} from "@nextui-org/react";
 import { Pencil, Check, X, ClipboardCheck } from "lucide-react";
-import useUpdateTaskForm from "../../../hooks/tasks/useUpdateTaskForm";
+import { useUpdateTaskForm } from "../../../hooks/tasks/useUpdateTaskForm";
 
 const UpdateTaskForm = ({ task, fetchAll }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -2,7 +2,7 @@ import { LogOut, MenuIcon } from "lucide-react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 
 import LogoInBlack from "./LogoInBlack";
-import useLogout from "../../hooks/auth/useLogout";
+import { useLogout } from "../../hooks/auth/useLogout";
 
 const LoggedNavbar = () => {
   const { handleLogout } = useLogout();

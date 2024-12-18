@@ -37,4 +37,4 @@ const TaskItem = ({ task, fetchTasks }) => {
   );
 };
 
-export default TaskItem;
+export { TaskItem };

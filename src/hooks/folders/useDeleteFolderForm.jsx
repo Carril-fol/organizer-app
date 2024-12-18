@@ -15,6 +15,7 @@ const useDeleteFolderForm = ({ folder, fetchFolders, onClose }) => {
       if (response?.status == 200) {
         fetchFolders();
         onClose();
+        window.location.reload();
       }
     } catch (error) {
       throw new Error("Error al eliminar la carpeta:", error);
@@ -23,4 +24,4 @@ const useDeleteFolderForm = ({ folder, fetchFolders, onClose }) => {
   return { name_folder, handleSubmitDelete };
 };
 
-export default useDeleteFolderForm;
+export { useDeleteFolderForm };

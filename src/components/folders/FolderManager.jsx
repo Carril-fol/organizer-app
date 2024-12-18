@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { Folder } from "lucide-react";
 
-import FolderList from "./FolderLists";
-import CreateFolderForm from "../folders/forms/CreateFolderForm";
-import useFolderManager from "../../hooks/folders/useFolderManager";
+import { FolderList } from "./FolderLists";
+import { CreateFolderForm } from "../folders/forms/CreateFolderForm";
+import { useFolderManager } from "../../hooks/folders/useFolderManager";
 
 const FolderManager = ({ onFolderSelect }) => {
   const { folders, fetchFolders, handleCreateFolder, handleFolderSelect } = useFolderManager();
@@ -24,4 +24,4 @@ FolderManager.propTypes = {
   onFolderSelect: PropTypes.func.isRequired,
 };
 
-export default FolderManager;
+export { FolderManager };
