@@ -1,5 +1,5 @@
-import { LogOut, MenuIcon } from "lucide-react";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+import { LogOut, MenuIcon, Settings } from "lucide-react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, Link } from "@nextui-org/react";
 
 import LogoInBlack from "./LogoInBlack";
 import { useLogout } from "../../hooks/auth/useLogout";
@@ -11,7 +11,7 @@ const LoggedNavbar = () => {
     <header className="mt-2 flex w-screen justify-between items-center px-4 py-2">
       <div className="flex items-center">
         <LogoInBlack height={40} width={40} />
-        <p className="font-bold text-inherit">Moose Planner</p>
+        <p className="font-bold text-inherit ml-2">Moose Planner</p>
       </div>
       <div className="max-w-fit">
         <Dropdown>
@@ -21,16 +21,24 @@ const LoggedNavbar = () => {
             </Button>
           </DropdownTrigger>
           <DropdownMenu>
-            <DropdownItem key="logout" className="text-danger" color="danger">
-              <Button onClick={handleLogout} className="flex items-center font-bold text-gray-800 transition-colors bg-transparent justify-center">
-                <LogOut className="mr-1" />
+            <DropdownItem key="settings">
+              <Link href="/settings" className="flex items-center text-gray-800">
+                <div className="flex items-center font-semibold text-medium">
+                  <Settings className="mr-2" />
+                  Configuración
+                </div>
+              </Link>
+            </DropdownItem>
+            <DropdownItem key="logout" color="danger" onClick={handleLogout}>
+              <div className="flex items-center font-semibold text-medium">
+                <LogOut className="mr-2" />
                 Cerrar sesión
-              </Button>
+              </div>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </div>
-    </header>
+    </header >
   );
 };
 
