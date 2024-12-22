@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Cookie from "js-cookies";
 
 import { FolderManager } from "../folders/FolderManager";
 import { TaskManager } from "../tasks/TaskManager";
