@@ -7,6 +7,7 @@ import LandingPage from './pages/core/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import HomePage from './pages/dashboard/HomePage';
+import SettingsPage from "./pages/core/SettingsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<HomePage />} />
+        <Route path="/settings" element={<SettingsPage />} />
       </Routes>
       <ToastContainer
         position="top-center"
