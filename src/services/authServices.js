@@ -26,7 +26,6 @@ export const logout = async () => {
   try {
     await API.post(urlAuth("logout"), {}, { withCredentials: true });
   } catch (error) {
-    console.error("Error en logout:", error.response?.data || error.message);
     throw new Error(error.response?.data?.msg || "Error desconocido");
   }
 };
@@ -36,6 +35,15 @@ export const refreshTokens = () => {
     API.post(urlAuth("refresh"));
   } catch (error) {
     console.error("Error en el refresh:", error.response?.data || error.message);
+    throw new Error(error.response?.data?.msg || "Error desconocido");
+  }
+}
+
+export const detailFromUserRequested = async () => {
+  try {
+    const response = await API.get(urlAuth("detail"));
+    return response.data;
+  } catch (error) {
     throw new Error(error.response?.data?.msg || "Error desconocido");
   }
 }
