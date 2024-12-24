@@ -8,6 +8,7 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import HomePage from './pages/dashboard/HomePage';
 import SettingsPage from "./pages/core/SettingsPage";
+import PersonalDataPage from './pages/core/PersonalDataPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="auth/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<HomePage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/settings/personal-data" element={<PersonalDataPage />} />
       </Routes>
       <ToastContainer
         position="top-center"
