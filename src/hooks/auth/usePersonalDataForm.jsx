@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { detailFromUserRequested } from "../../services/authServices";
+import { toast } from "react-toastify";
+
+import { detailFromUserRequested, updateDataFromUser } from "../../services/authServices";
 
 const usePersonalDataForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -27,19 +29,28 @@ const usePersonalDataForm = () => {
     fetchData();
   }, []);
 
-  // // Handle form submission
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     setLoading(true);
-  //     await updateUserDetails({ firstName, lastName, email: isEmailEnabled ? email : undefined });
-  //     alert("Datos guardados correctamente");
-  //   } catch (err) {
-  //     setError("Error updating user details");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const updatedFields = {
+        ...(firstName && { "first_name": firstName  }),
+        ...(lastName && { "last_name": lastName }),
+        ...(isEmailEnabled && email && { email }),
+      };
+
+      if (Object.keys(updatedFields).length === 0) {
+        return;
+      }
+
+      const res = await updateDataFromUser(updatedFields);
+      toast.success("Datos actualizados correctamente");
+    } catch (err) {
+      toast.error("Error actualizando los datos del usuario");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return {
     firstName,
@@ -52,7 +63,7 @@ const usePersonalDataForm = () => {
     setIsEmailEnabled,
     loading,
     error,
-    // handleSubmit,
+    handleSubmit
   };
 };
 
