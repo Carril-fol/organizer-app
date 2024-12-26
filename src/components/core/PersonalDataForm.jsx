@@ -55,8 +55,8 @@ const PersonalDataForm = () => {
             label="Correo Electrónico"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            disabled={!isEmailEnabled}
-            required={isEmailEnabled}
+            isDisabled={!isEmailEnabled}
+            isRequired={isEmailEnabled}
           />
           <div className="flex items-center space-x-2">
             <Checkbox
@@ -76,7 +76,7 @@ const PersonalDataForm = () => {
           </div>
         </div>
       </div>
-      <Button className="w-full bg-black text-white font-semibold" disabled={loading}>
+      <Button type="submit" className="w-full bg-black text-white font-semibold" disabled={loading}>
         {loading ? (
           <div className="flex items-center justify-center">
             <l-ring size="25" speed="1.75" color="white"></l-ring>
