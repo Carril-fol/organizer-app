@@ -14,14 +14,6 @@
 ## 🚀 Estado del Proyecto
 El proyecto está en desarrollo, aunque las funcionalidades principales ya están operativas.
 
-## 📋 Contenidos
-- [📷 Fotos del proyecto](#📷-fotos-del-proyecto)
-- [✨ Funcionalidades](#✨-funcionalidades)
-- [🛠️ Tecnologías Usadas](#🛠️-tecnologías-usadas)
-- [📦 Cómo Obtener el Proyecto](#📦-cómo-obtener-el-proyecto)
-- [🌐 Deploy en Render](#🌐-deploy-en-render)
-- [💭 Reflexión del Proyecto](#💭-reflexión-del-proyecto)
-
 ## 📷 Fotos del Proyecto
 <div align="center">
     <img src="./public/images/landingpage-screen.webp" alt="Landing Page Screenshot" width="80%" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-bottom: 15px;">
