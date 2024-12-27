@@ -1,42 +1,25 @@
 import React from "react";
-
 import { ring } from "ldrs";
 import { User } from "lucide-react";
-import { Input, Checkbox, Button } from "@nextui-org/react";
-import usePersonalDataForm from "../../hooks/auth/usePersonalDataForm";
+import { Input, Checkbox } from "@nextui-org/react";
 
 ring.register();
 
-const PersonalDataForm = () => {
-  const {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    isEmailEnabled,
-    setIsEmailEnabled,
-    loading,
-    error,
-    handleSubmit,
-  } = usePersonalDataForm();
-
+const PersonalDataForm = ({ data, onChange, isEmailEnabled, setIsEmailEnabled }) => {
   return (
-    <form onSubmit={handleSubmit} className="w-2/5 mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div>
       <div className="flex items-center space-x-3 border-b-2 border-black">
         <User size={24} />
         <h2 className="text-lg font-semibold text-black">Datos personales</h2>
       </div>
       <div className="mt-5 space-y-9 mb-10">
-        {error && <p className="text-red-500">{error}</p>}
         <div className="space-y-2">
           <Input
             variant="underlined"
             label="Nombre"
             type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={data.first_name}
+            onChange={(e) => onChange("first_name", e.target.value)}
           />
         </div>
         <div className="space-y-2">
@@ -44,8 +27,8 @@ const PersonalDataForm = () => {
             variant="underlined"
             label="Apellido"
             type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={data.last_name}
+            onChange={(e) => onChange("last_name", e.target.value)}
           />
         </div>
         <div className="flex space-x-2">
@@ -53,8 +36,8 @@ const PersonalDataForm = () => {
             variant="underlined"
             type="email"
             label="Correo Electrónico"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={data.email}
+            onChange={(e) => onChange("email", e.target.value)}
             isDisabled={!isEmailEnabled}
             isRequired={isEmailEnabled}
           />
@@ -76,16 +59,7 @@ const PersonalDataForm = () => {
           </div>
         </div>
       </div>
-      <Button type="submit" className="w-full bg-black text-white font-semibold" disabled={loading}>
-        {loading ? (
-          <div className="flex items-center justify-center">
-            <l-ring size="25" speed="1.75" color="white"></l-ring>
-          </div>
-        ) : (
-          "Guardar"
-        )}
-      </Button>
-    </form >
+    </div>
   );
 };
 
