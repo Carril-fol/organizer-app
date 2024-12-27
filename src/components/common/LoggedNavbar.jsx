@@ -10,8 +10,10 @@ const LoggedNavbar = () => {
   return (
     <header className="mt-2 flex w-screen justify-between items-center px-4 py-2">
       <div className="flex items-center">
-        <LogoInBlack height={40} width={40} />
-        <p className="font-bold text-inherit ml-2">Moose Planner</p>
+        <a href="/dashboard" className="cursor-pointer flex items-center">
+          <LogoInBlack height={40} width={40} />
+          <p className="font-bold text-inherit ml-2">Moose Planner</p>
+        </a>
       </div>
       <div className="max-w-fit">
         <Dropdown>
