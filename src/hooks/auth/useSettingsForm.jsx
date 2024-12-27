@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { detailFromUserRequested, updateDataFromUser } from "../../services/authServices";
 
 const useSettingsForm = () => {
+  const navigate = useNavigate();
   const [personalData, setPersonalData] = useState({
     first_name: "",
     last_name: "",
@@ -54,6 +56,7 @@ const useSettingsForm = () => {
       await updateDataFromUser(updatedFields);
       toast.success("Datos actualizados correctamente");
       setUpdatedFields({});
+      navigate("/dashboard");
     } catch (err) {
       toast.error("Error actualizando los datos del usuario");
     } finally {
