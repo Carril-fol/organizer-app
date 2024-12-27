@@ -1,9 +1,16 @@
-import { Button, Input, Link } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import LogoInBlack from "../common/LogoInBlack";
 import { useLoginForm } from "../../hooks/auth/useLoginForm";
 
 const LoginForm = () => {
-  const { email, setEmail, password, setPassword, error, handleSubmit } = useLoginForm();
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    handleSubmit
+  } = useLoginForm();
 
   return (
     <form method="POST" className="min-w-fit px-5 py-5 rounded-xl translate-y-full animate-move-up transition-all duration-100 ease-out" onSubmit={handleSubmit}>
@@ -37,7 +44,7 @@ const LoginForm = () => {
             </div>
             <div className="py-2">
               <Input
-                label="Password"
+                label="Contraseña"
                 type="password"
                 variant="underlined"
                 className="mb-1"
@@ -45,9 +52,6 @@ const LoginForm = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Link className="text-sm text-blue-500 hover:underline">
-                ¿Olvidaste tu contraseña?
-              </Link>
             </div>
             <div className="py-4 flex flex-col justify-center">
               <Button
@@ -59,11 +63,8 @@ const LoginForm = () => {
                 Iniciar Sesión
               </Button>
             </div>
-            <p className="text-sm text-gray-600 mt-4">
-              ¿No tienes una cuenta?{' '}
-              <a href="register" className="text-blue-500 hover:underline">
-                Registrate
-              </a>
+            <p>
+              ¿No tienes una cuenta?{" "}<a href="register" className="text-blue-500 hover:underline"> Registrate</a>
             </p>
           </div>
         </div>
