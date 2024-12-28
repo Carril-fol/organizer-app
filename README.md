@@ -67,12 +67,12 @@ docker pull carrifol/organizer-app
 docker run -p [PORT TO EXPOSE]:4173 carrilfol/organizer-app
 ```
 
-## 🌐 Deploy en Render
+## 🌐 Deploy en Vercel
 Accede a una versión en vivo de la aplicación aqui.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://restful-organizer.onrender.com)
+[![Deploy to Vercel](https://vercel.com/button)](https://organizer-app-black.vercel.app/)
 
->Nota: El servidor puede tardar un poco en inicializarse.
+>Nota: El resultado de las peticiones que se hacen puede tardar un poco porque el back-end se encuentra alojado en un Render con la capa gratuita.
 
 ## 💭 Reflexión del Proyecto
 
