@@ -3,7 +3,6 @@ import { Button } from "@nextui-org/react";
 import useSettingsForm from "../../hooks/auth/useSettingsForm";
 
 const PersonalDataForm = React.lazy(() => import("./PersonalDataForm"));
-const SecurityDataForm = React.lazy(() => import("./SecurityDataForm"));
 
 const SettingsForm = () => {
   const {
