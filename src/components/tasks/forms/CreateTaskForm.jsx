@@ -95,7 +95,7 @@ const CreateTaskForm = ({ folderId, onTaskCreated }) => {
 };
 
 CreateTaskForm.propTypes = {
-  folderId: PropTypes.object.isRequired,
+  folderId: PropTypes.string.isRequired,
   onTaskCreated: PropTypes.func.isRequired,
 };
 
