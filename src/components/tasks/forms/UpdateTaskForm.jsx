@@ -27,7 +27,7 @@ const UpdateTaskForm = ({ task, fetchAll }) => {
     handleSubmit,
   } = useUpdateTaskForm({ task, fetchAll, onClose });
 
-  const optionsTask = ["Completed", "Not Completed", "In Process"];
+  const optionsTask = ["Completo", "Incompleto", "En Proceso"];
 
   return (
     <>
