@@ -6,7 +6,14 @@ import CreateTaskForm from "../tasks/forms/CreateTaskForm";
 import { useTaskList } from "../../hooks/tasks/useTaskList";
 
 const TaskManager = ({ folderId }) => {
-  const { tasks, hasTasks, isScrollable, isLoading, error, fetchTasks } = useTaskList(folderId);
+  const {
+    tasks,
+    hasTasks,
+    isScrollable,
+    isLoading,
+    error,
+    fetchTasks
+  } = useTaskList(folderId);
 
   return (
     <div className="w-full max-w-full">
@@ -27,7 +34,7 @@ const TaskManager = ({ folderId }) => {
   );
 };
 
-TaskList.propTypes = {
+TaskManager.propTypes = {
   folderId: PropTypes.string.isRequired,
 };
 
